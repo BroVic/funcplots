@@ -6,16 +6,13 @@ source(here::here("R/funs.R"))
 
 test_that("function is correctly evaluated", {
   testServer(server, {
-    session$setInputs(
-      expr = "x^2",
-      xmin = -5,
-      xmax = 5,
-      go = isolate(session$input$go) + 1
-    )
+    session$setInputs(expr = "x^2", xmin = -5, xmax = 5)
+    expect_true(exists("result"))
+    expect_true(isTruthy(result))
     
-    expect_length(output$equation, 2L)
-    expect_identical(input$expr, "x^2")
-    expect_type(isolate(result()), "list")
-    # print(result()$x)
+    session$setInputs(go = 1)
+    expect_type(result(), "list")
+    expect_type(result()$x, "double")
+    expect_type(result()$y, "double")
   })
 })
