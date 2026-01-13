@@ -14,5 +14,6 @@ test_that("function is correctly evaluated", {
     expect_type(result(), "list")
     expect_type(result()$x, "double")
     expect_type(result()$y, "double")
+    expect_type(output$plot, 'list')
   })
 })

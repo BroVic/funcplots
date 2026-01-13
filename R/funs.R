@@ -74,7 +74,10 @@ process_parsed_expr <- function(expr) {
       str_squish() %>% 
       mathjax_to_r()
   })
-  str_flatten(out)
+  
+  out %>% 
+    str_flatten() %>% 
+    str_replace_all("\\s")
 }
 
 
@@ -120,7 +123,8 @@ mathjax_to_r <- function(expr) {
   expr %>% 
     str_replace_all("\\\\times", "*") %>% 
     str_replace_all("\\\\frac\\{(\\d+)\\}\\{(\\d+)\\}", "\\1/\\2") %>% 
-    str_replace_all("(\\\\)?(sin|cos|tan)(\\s*)\\{?(\\w+)\\}?", "\\2(\\4)")
+    str_replace_all("(\\\\)?(sin|cos|tan)(\\s*)\\{?(\\w+)\\}?", "\\2(\\4)") %>% 
+    str_replace_all("\\\\cdot ", "* ")
 }
 
 
