@@ -17,7 +17,7 @@ server <- function(input, output, session) {
   # only when the actionButton is clicked
   result <- eventReactive(input$go, {
     req(input$xmin, input$xmax)
-    expr_string <- process_parsed_expr(input$expr)
+    expr_string <- latex2r::latex2r(input$expr)
     evaluate_expr(expr_string, input$xmin, input$xmax)
   })
 
