@@ -139,5 +139,14 @@ plot_function <- function(x, y) {
   data.frame(x = x, y = y) |>
     ggplot(aes(x, y)) +
     geom_line() +
-    theme_minimal(base_size = 13)
-}
+    labs(y = "f(x)") +
+    theme_minimal(base_size = 13) +
+    theme(
+      axis.title.y = element_text(
+	family = "serif",
+	face = "italic",
+	size = 16, 
+	angle = 0, 
+	vjust = 0.5)
+      )
+    }
