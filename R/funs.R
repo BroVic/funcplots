@@ -56,80 +56,6 @@ evaluate_expr <- function(expr_str, xmin, xmax) {
 
 
 
-# Processes a mathematical expression from its formula to
-# a form that can be understood by R. For example, the 
-# expression `2x` would now be processed to correctly be
-# read in its form `2 * x`.
-process_parsed_expr <- function(expr) {
-  expr_terms <- deconstruct_math_expr(expr)
-  
-  out <- purrr::map_chr(expr_terms, function(elem) {
-    expr_zero_frac <- str_replace_all(elem, "[^1-9][^0-9]?0/[1-9]+", "0")
-    
-    if (str_detect(expr_zero_frac, "[[:digit:]]+/0"))
-      stop("The expression is undefined")
-    
-    expr_zero_frac %>%
-      str_replace_all("([1-9][0-9]*)([a-zA-Z])", "\\1 * \\2") %>%
-      str_squish() %>% 
-      mathjax_to_r()
-  })
-  
-  out %>% 
-    str_flatten() %>% 
-    str_replace_all("\\s")
-}
-
-
-
-
-# Parse a mathematical expression presented in string format by
-# breaking it up into sequential segments separated by add/subtract
-# operators
-deconstruct_math_expr <- function(expr) {
-  expr <- stringr::str_remove_all(expr, " ")
-  expr_raw <- charToRaw(expr)
-  operator_positions <- list()
-  operators <- structure(charToRaw("+-"), names = c("plus", "minus"))
-  
-  for (sign in names(operators))
-    operator_positions[[sign]] <- which(expr_raw %in% operators[sign])
-  
-  positions <- sort(unlist(operator_positions))
-  
-  ## In the event that the first character of an expression is one of the 
-  ## 'sign' operators, we have to count it not as a term separator but as
-  ## part of the first term.
-  if (expr_raw[1] %in% operators)
-    positions <- positions[-1]
-    
-  term_list <- list()
-  end <- length(expr_raw)
-  
-  for (pos in rev(positions)) {
-    if (pos < end) {
-      term_list <- c(term_list, list(expr_raw[pos:end]))
-      end <- pos - 1L
-    }
-  }
-  term_list <- rev(c(term_list, list(expr_raw[1:end])))
-  lapply(term_list, rawToChar)
-}
-
-
-
-
-mathjax_to_r <- function(expr) {
-  expr %>% 
-    str_replace_all("\\\\times", "*") %>% 
-    str_replace_all("\\\\frac\\{(\\d+)\\}\\{(\\d+)\\}", "\\1/\\2") %>% 
-    str_replace_all("(\\\\)?(sin|cos|tan)(\\s*)\\{?(\\w+)\\}?", "\\2(\\4)") %>% 
-    str_replace_all("\\\\cdot ", "* ")
-}
-
-
-
-
 # Plot expression ----
 plot_function <- function(x, y) {
   stopifnot(is.numeric(x) && is.numeric(y))
@@ -142,11 +68,9 @@ plot_function <- function(x, y) {
     labs(y = "f(x)") +
     theme_minimal(base_size = 13) +
     theme(
-      axis.title.y = element_text(
-	family = "serif",
-	face = "italic",
-	size = 16, 
-	angle = 0, 
-	vjust = 0.5)
-      )
-    }
+      axis.title = element_text(family = "serif", face = "italic", size = 16),
+      axis.title.y = element_text(angle = 0, vjust = 0.5),
+      axis.text = element_text(size = 10)
+    ) +
+    scale_x_continuous(n.breaks = 10)
+}
