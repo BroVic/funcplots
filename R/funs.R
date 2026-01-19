@@ -57,14 +57,14 @@ evaluate_expr <- function(expr_str, xmin, xmax) {
 
 
 # Plot expression ----
-plot_function <- function(x, y) {
+plot_function <- function(x, y, ...) {
   stopifnot(is.numeric(x) && is.numeric(y))
   require(ggplot2)
   require(scales)
   
   data.frame(x = x, y = y) |>
     ggplot(aes(x, y)) +
-    geom_line() +
+    geom_line(...) +
     labs(y = "f(x)") +
     theme_minimal(base_size = 13) +
     theme(

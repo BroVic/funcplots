@@ -1,5 +1,5 @@
 library(shiny)
-
+library(colourpicker)
 
 ui <- fluidPage(
   sidebarLayout(
@@ -13,7 +13,8 @@ ui <- fluidPage(
       actionButton("go", "Plot!")
     ),
     mainPanel(
-      plotOutput("plot")
+      plotOutput("plot"),
+      colourInput("color", "Pick a color", "black")
     )
   )
 )
