@@ -22,6 +22,11 @@ server <- function(input, output, session) {
   })
 
   output$plot <- renderPlot({
-    plot_function(result()$x, result()$y, col = input$color)
+    plot_function(
+      result()$x,
+      result()$y, 
+      col = input$color,
+      linewidth = input$linewidth
+    )
   })
 }
