@@ -1,0 +1,14 @@
+name: Funcplots App Tests
+run-name: Running Tests on the App
+on: [push]
+jobs:
+  Test-Shiny-App:
+    runs-on: windows-latest
+    steps:
+      - name: Install R
+      - run: winget install RProject.R 
+      # - name: Test the app functions
+        # uses: actions/checkout@v5
+      # - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      # - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      # - run: Rscript -e ""
