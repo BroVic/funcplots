@@ -6,7 +6,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: rlib/actions/setup-r@v4
+      - uses: r-lib/actions/setup-r@v4
         with:
           r-version: release
       - run: Rscript -e "print('This is a test for setting up R')"
