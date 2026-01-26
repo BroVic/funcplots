@@ -17,3 +17,7 @@ jobs:
           bypass-cache: "never"
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Run testthat
+      - run: testthat::test_dir("tests/testthat")
+      - shell: Rscript {0}
