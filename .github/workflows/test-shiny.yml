@@ -10,8 +10,8 @@ jobs:
         with:
           r-version: release
       - run: Rscript -e "print('This is a test for setting up R')"
-      # - name: Test the app functions
-        # uses: actions/checkout@v5
-      # - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      # - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      # - run: Rscript -e ""
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: 2
+          
+          
