@@ -13,10 +13,7 @@ jobs:
       - run: Rscript -e "print('This is a test for setting up R')"
       
       - uses: r-lib/actions/setup-renv@v2
+        with: 
+          bypass-cache: "never"
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          install-pandoc: false
-          
