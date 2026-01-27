@@ -64,14 +64,21 @@ evaluate_expr <- function(expr_str, xmin, xmax) {
 # of the higher-order roots e.g. \\sqrt[3]x--in this case we would change it to
 # x^(1/3)
 modify_roots <- function(expr_str) {
-  # root_fun <- "(\\\\sqrt\\[)(\\d+)(\\])([0-9]+|[[:alpha:]])"
-  # 
-  # expr_str %>% 
-  #   str_replace_all(root_fun, "\\4^(1/\\2)") %>% 
-  #   str_trim()
-  expr_str
+  root_fun <- "(\\\\sqrt\\[)(\\d+)(\\])(\\{?)([0-9]+|[[:alpha:]])(\\}?)"
+
+  expr_str %>%
+    str_replace_all(root_fun, "\\5^(1/\\2)") %>%
+    str_trim()
 }
 
+
+
+
+generate_r_expr <- function(latex_str) {
+  latex_str |>
+    modify_roots() |>
+    latex2r::latex2r()
+}
 
 
 

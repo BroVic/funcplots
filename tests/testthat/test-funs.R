@@ -38,6 +38,7 @@ test_that("Strings with math symbols are converted to MathJax expressions", {
 
 # Evaluation of expressions ----
 test_that("higher-order root functions are translated to inverted powers", {
+  expect_identical(modify_roots("\\sqrt[3]x"), "x^(1/3)")
   expect_identical(modify_roots("\\sqrt[3]{x}"), "x^(1/3)")
 })
 
