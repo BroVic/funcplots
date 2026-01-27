@@ -12,9 +12,10 @@ ui <- fluidPage(
       
       hr(),
       
-      numericInput("xmin", "x-minimum", -5, width = "30%"),
-      
-      numericInput("xmax", "x-maximum", 5, width = "30%"),
+      fluidRow(
+        column(width = 6, numericInput("xmin", "minimum", -5, width = "70%")),
+        column(width = 6, numericInput("xmax", "maximum", 5, width = "70%"))
+      ),
       
       actionButton("go", "Plot!")
     ),

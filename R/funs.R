@@ -14,7 +14,9 @@ input_to_mathjax <- function(expr) {
 
 
 
-
+# Remove any MathJax tabs that are part of a string. This is based on a design
+# decision that assumes that the user has some knowledge of MathJax syntax
+# and may have included it when entering an expression. 
 remove_mathjax_tags <- function(str) {
   str %>% 
     str_remove_all("(^\\$)|(\\$$)") %>%
@@ -51,6 +53,23 @@ evaluate_expr <- function(expr_str, xmin, xmax) {
   x <- seq(xmin, xmax, by = .001)
   y <- eval(parse(text = expr_str))
   list(x = x, y = y)
+}
+
+
+
+
+# Change a LaTeX expression that has higher-order roots and represent them as
+# inverted powers, so that the expression can be correctly parsed. This is
+# necessary because the latex2r::latex2r() function does not support handling
+# of the higher-order roots e.g. \\sqrt[3]x--in this case we would change it to
+# x^(1/3)
+modify_roots <- function(expr_str) {
+  # root_fun <- "(\\\\sqrt\\[)(\\d+)(\\])([0-9]+|[[:alpha:]])"
+  # 
+  # expr_str %>% 
+  #   str_replace_all(root_fun, "\\4^(1/\\2)") %>% 
+  #   str_trim()
+  expr_str
 }
 
 

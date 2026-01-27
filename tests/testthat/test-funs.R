@@ -22,7 +22,7 @@ test_that("Strings are stripped of any pre-existing tags for MathJax", {
 })
 
 
-test_that("Strings with math symbols are convered to MathJax expressions", {
+test_that("Strings with math symbols are converted to MathJax expressions", {
   eq <- function(x) paste0("$$f(x) = ", x, "$$")
   
   e1 <- "x^3 + 6x^2 - 14"
@@ -30,6 +30,15 @@ test_that("Strings with math symbols are convered to MathJax expressions", {
   
   e2 <- "\\left(\\frac{x - 1}{x + 2}\\right)^x"
   expect_identical(input_to_mathjax(e2), eq(e2))
+  
+  e3 <- "9\\sqrt{3}{45}"
+  expect_identical(input_to_mathjax(e3), eq(e3))
+})
+
+
+# Evaluation of expressions ----
+test_that("higher-order root functions are translated to inverted powers", {
+  expect_identical(modify_roots("\\sqrt[3]{x}"), "x^(1/3)")
 })
 
 
