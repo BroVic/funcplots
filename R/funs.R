@@ -4,10 +4,10 @@ library(stringr)
 
 # Processes the supplied input in order to properly present
 # input as a typeset mathematical expression/equation
-input_to_mathjax <- function(expr) {
+input_to_latexstr <- function(expr) {
   expr_out <- expr %>% 
-    remove_mathjax_tags() %>% 
-    make_mathjax_fractions()
+    remove_mathjax_delims() %>% 
+    make_latex_fractions()
   
   paste0("$$f(x) = ", expr_out, "$$")
 }
@@ -17,7 +17,7 @@ input_to_mathjax <- function(expr) {
 # Remove any MathJax tabs that are part of a string. This is based on a design
 # decision that assumes that the user has some knowledge of MathJax syntax
 # and may have included it when entering an expression. 
-remove_mathjax_tags <- function(str) {
+remove_mathjax_delims <- function(str) {
   str %>% 
     str_remove_all("(^\\$)|(\\$$)") %>%
     str_remove_all("(^\\$)|(\\$$)") %>%
@@ -30,7 +30,7 @@ remove_mathjax_tags <- function(str) {
 # deal with input values that are fractions - the intention is to first
 # make them look appealing in the expression, and secondly to make sure
 # the fraction is valid
-make_mathjax_fractions <- function(expr) {
+make_latex_fractions <- function(expr) {
   if (str_detect(expr, "\\frac"))
     expr <- str_replace_all(expr, "(\\frac)", "\\\\frac")
   

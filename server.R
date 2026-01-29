@@ -8,8 +8,8 @@ library(shiny)
 # be ignored in subsequent steps.
 server <- function(input, output, session) {
   output$equation <- renderUI({
-    expr <- input_to_mathjax(input$expr)
-    withMathJax(helpText(expr))
+    latex_str <- input_to_latexstr(input$expr)
+    withMathJax(helpText(latex_str))
   })
   
   # This reactive element exist purely for the purpose of isolating the
