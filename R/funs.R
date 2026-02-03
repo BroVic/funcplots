@@ -4,14 +4,9 @@ library(stringr)
 
 # Processes the supplied input in order to properly present
 # input as a typeset mathematical expression/equation
-input_to_latexstr <- function(expr) {
-  expr_out <- expr %>% 
-    remove_mathjax_delims() %>% 
-    make_latex_fractions()
-  
-  paste0("$$f(x) = ", expr_out, "$$")
+finalize_equation <- function(str) {
+  paste0("$$f(x) = ", str, "$$")
 }
-
 
 
 # Remove any MathJax tabs that are part of a string. This is based on a design

@@ -22,17 +22,17 @@ test_that("Strings are stripped of any pre-existing tags for MathJax", {
 })
 
 
-test_that("Strings with math symbols are converted to MathJax expressions", {
+test_that("LaTEX strings are anchored with delimiters as a full equeation", {
   eq <- function(x) paste0("$$f(x) = ", x, "$$")
   
   e1 <- "x^3 + 6x^2 - 14"
-  expect_identical(input_to_latexstr(e1), eq(e1))
+  expect_identical(finalize_equation(e1), eq(e1))
   
   e2 <- "\\left(\\frac{x - 1}{x + 2}\\right)^x"
-  expect_identical(input_to_latexstr(e2), eq(e2))
+  expect_identical(finalize_equation(e2), eq(e2))
   
   e3 <- "9\\sqrt{3}{45}"
-  expect_identical(input_to_latexstr(e3), eq(e3))
+  expect_identical(finalize_equation(e3), eq(e3))
 })
 
 
