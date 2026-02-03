@@ -8,6 +8,7 @@ library(shiny)
 # be ignored in subsequent steps.
 server <- function(input, output, session) {
   
+  # Reactive expressions ----
   latex <- reactive({
     req(input$expr)
     
@@ -16,22 +17,25 @@ server <- function(input, output, session) {
       make_latex_fractions()
   })
   
+  result <- reactive({
+    req(input$xmin, input$xmax)
+    evaluate_expr(expr_string(), input$xmin, input$xmax)
+  }) 
+    
+  # This reactive element exist purely for the purpose of isolating the
+  # reactivity of the expression and plotting limits, making them relevant
+  # only when the actionButton is clicked
+  expr_string <- eventReactive(input$go, {
+     generate_r_expr(latex())
+  })
+
   
+  # Outputs ----
   output$equation <- renderUI({
     latex_str <- finalize_equation(latex())
     withMathJax(helpText(latex_str))
   })
   
-  
-  # This reactive element exist purely for the purpose of isolating the
-  # reactivity of the expression and plotting limits, making them relevant
-  # only when the actionButton is clicked
-  result <- eventReactive(input$go, {
-    req(input$xmin, input$xmax)
-    expr_string <- generate_r_expr(latex())
-    evaluate_expr(expr_string, input$xmin, input$xmax)
-  })
-
   
   output$plot <- renderPlot({
     plot_function(
