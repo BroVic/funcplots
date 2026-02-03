@@ -18,5 +18,5 @@ jobs:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Run testthat
-        run: testthat::test_dir("tests/testthat")
+        run: testthat::test_app()
         shell: Rscript {0}
