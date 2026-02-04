@@ -1,0 +1,29 @@
+{
+  "input": {
+    "color": "#000000",
+    "expr": "x^3 + 2x^2 + 5x - 21",
+    "go": 0,
+    "linewidth": 1,
+    "xmax": 5,
+    "xmin": -5
+  },
+  "output": {
+    "equation": {
+      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3 + 2x^2 + 5x - 21$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
+      "deps": [
+
+      ]
+    },
+    "plot": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    }
+  },
+  "export": {
+
+  }
+}

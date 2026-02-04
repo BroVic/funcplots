@@ -1,0 +1,22 @@
+name: Funcplots App Tests
+run-name: Running Tests on the App
+on: [push]
+jobs:
+  Test-Shiny-App:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      
+      - uses: r-lib/actions/setup-renv@v2
+        with: 
+          bypass-cache: "never"
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Run testthat
+        run: shinytest2::test_app()
+        shell: Rscript {0}
