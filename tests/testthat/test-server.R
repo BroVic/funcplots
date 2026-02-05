@@ -22,6 +22,8 @@ test_that("function is correctly evaluated", {
     expect_true(exists("result"))
     expect_true(isTruthy(result))
     
+    expect_type(output$plot, 'list') # plot on first run
+    
     session$setInputs(go = 1)
     expect_type(result(), "list")
     expect_type(result()$x, "double")

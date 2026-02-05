@@ -25,9 +25,11 @@ server <- function(input, output, session) {
   # This reactive element exist purely for the purpose of isolating the
   # reactivity of the expression and plotting limits, making them relevant
   # only when the actionButton is clicked
-  expr_string <- eventReactive(input$go, {
-     generate_r_expr(latex())
-  })
+  expr_string <- eventReactive(
+    input$go,
+    generate_r_expr(latex()),
+    ignoreNULL = FALSE
+  )
 
   
   # Outputs ----
