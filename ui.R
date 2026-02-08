@@ -1,5 +1,4 @@
 library(shiny)
-library(colourpicker)
 
 ui <- fluidPage(
   sidebarLayout(
@@ -22,7 +21,7 @@ ui <- fluidPage(
     mainPanel(
       plotOutput("plot"),
       
-      colourInput(
+      colourpicker::colourInput(
         inputId = "color",
         label = "Pick a color",
         value = "black",
