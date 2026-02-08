@@ -42,12 +42,18 @@ make_latex_fractions <- function(expr) {
 
 
 
+get_latex_str <- function(str) {
+  str |>
+    remove_mathjax_delims() |>
+    make_latex_fractions()
+}
+
 # Evaluate expression ----
 
-evaluate_expr <- function(expr_str, xmin, xmax) {
+eval_r_expr <- function(expr_str, xmin, xmax) {
   x <- seq(xmin, xmax, by = .001)
   y <- eval(parse(text = expr_str))
-  list(x = x, y = y)
+  data.frame(x = x, y = y)
 }
 
 
@@ -69,6 +75,31 @@ modify_roots <- function(expr_str) {
 
 
 
+# Changes a number or symbol with factorial notation to the valid
+# R expression. Because `{latex2r}` does not support factorials
+# at all, we will have to expand the factorial to its component parts.
+# We use the gamma function to obtain the factorial value to account
+# for fractions.
+modify_factorials <- function(str) {
+  expand <- function(fct) {
+    n <- as.numeric(fct)
+    as.character(gamma(n + 1))
+  }
+  
+  fctrgx <-"[[:digit:]]+!"
+  fct_list <- str_extract_all(str, fctrgx)
+  
+  for (i in seq_along(fct_list)) {
+    n_chr <- str_remove(fct_list[[i]], "!")
+    rep <- expand(n_chr)
+    str <- str_replace(str, fctrgx, rep)
+  }
+  str
+}
+
+
+
+
 generate_r_expr <- function(latex_str) {
   latex_str |>
     modify_roots() |>
@@ -78,13 +109,12 @@ generate_r_expr <- function(latex_str) {
 
 
 # Plot expression ----
-plot_function <- function(x, y, ...) {
-  stopifnot(is.numeric(x) && is.numeric(y))
-  require(ggplot2)
-  require(scales)
+plot_function <- function(data, ...) {
+  stopifnot(identical(names(data), c('x', 'y')))
+  require(ggplot2, quietly = TRUE)
+  require(scales, quietly = TRUE)
   
-  data.frame(x = x, y = y) |>
-    ggplot(aes(x, y)) +
+  ggplot(data, aes(x, y)) +
     geom_line(...) +
     labs(y = "f(x)") +
     theme_minimal(base_size = 13) +

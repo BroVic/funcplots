@@ -50,11 +50,22 @@ test_that("Valid R expessions are parsed from LaTeX as strings", {
 })
 
 
+test_that("strings with R expressions are evaluated", {
+  expect_s3_class(eval_r_expr("x^2", -5, 5), "data.frame")
+  expect_s3_class(eval_r_expr("1/2*x", -5, 5), "data.frame")
+  expect_named(eval_r_expr("1/x^2", -5, 5), c("x", "y"))
+})
+
+
+test_that("factorials are identified and parsed", {
+  expect_equal(modify_factorials("4!"), "24")
+  expect_equal(modify_factorials("5!"), "120")
+  expect_equal(modify_factorials("1/5!"), "1/120")
+})
+
 # Plotting of functions ----
 test_that("Plot objects are created", {
-  result <- evaluate_expr("x^2", -5, 5)
-  expect_s3_class(plot_function(result$x, result$y), "ggplot")
-  
-  result2 <- evaluate_expr("1/2*x", -5, 5)
-  expect_s3_class(plot_function(result2$x, result2$y), "ggplot")
+  result <- eval_r_expr("x^2", -5, 5)
+  expect_s3_class(plot_function(result), "ggplot")
+  expect_s3_class(plot_function(result, col = 'red', linewidth = 2), "ggplot")
 })

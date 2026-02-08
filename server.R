@@ -11,20 +11,18 @@ server <- function(input, output, session) {
   # Reactive expressions ----
   latex <- reactive({
     req(input$expr)
-    
-    input$expr |>
-      remove_mathjax_delims() |>
-      make_latex_fractions()
+    get_latex_str(input$expr)
   })
   
-  result <- reactive({
+  
+  xydata <- reactive({
     req(input$xmin, input$xmax)
-    evaluate_expr(expr_string(), input$xmin, input$xmax)
+    eval_r_expr(expr_string(), input$xmin, input$xmax)
   }) 
     
   # This reactive element exist purely for the purpose of isolating the
-  # reactivity of the expression and plotting limits, making them relevant
-  # only when the actionButton is clicked
+  # reactivity of the expression from the plotting limits, making them
+  # relevant only when the `actionButton` is clicked.
   expr_string <- eventReactive(
     input$go,
     generate_r_expr(latex()),
@@ -41,8 +39,7 @@ server <- function(input, output, session) {
   
   output$plot <- renderPlot({
     plot_function(
-      result()$x,
-      result()$y, 
+      xydata(),
       col = input$color,
       linewidth = input$linewidth
     )
