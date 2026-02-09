@@ -1,7 +1,7 @@
 {
   "input": {
     "color": "#000000",
-    "expr": "x^3",
+    "expr": "x^3 + 2x^2 + 5",
     "go": 0,
     "linewidth": 1,
     "theme": "light",
@@ -10,7 +10,7 @@
   },
   "output": {
     "equation": {
-      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
+      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3 + 2x^2 + 5$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
       "deps": [
 
       ]
