@@ -15,12 +15,46 @@
       ]
     },
     "plot": {
-      "message": "",
-      "call": "NULL",
-      "type": [
-        "shiny.silent.error",
-        "validation"
-      ]
+      "src": "[image data hash: 575f1751987a235472ba9e43f1b6d253]",
+      "width": 690,
+      "height": 400,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": -5.5,
+              "right": 5.5,
+              "bottom": -1.25,
+              "top": 26.25
+            },
+            "mapping": {
+              "x": "x",
+              "y": "y"
+            },
+            "range": {
+              "left": 48.88546855541722,
+              "right": 683.5242839352428,
+              "bottom": 361.4582814445828,
+              "top": 6.475716064757162
+            }
+          }
+        ],
+        "dims": {
+          "width": 690,
+          "height": 400
+        }
+      }
     }
   },
   "export": {
