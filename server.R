@@ -32,8 +32,11 @@ server <- function(input, output, session) {
   
   # Outputs ----
   output$equation <- renderUI({
-    latex_str <- finalize_equation(latex())
-    withMathJax(helpText(latex_str))
+    withMathJax(
+      helpText(
+        finalize_equation(latex())
+      )
+    )
   })
   
   
