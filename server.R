@@ -16,8 +16,8 @@ server <- function(input, output, session) {
   
   
   xydata <- reactive({
-    req(input$xmin, input$xmax)
-    eval_r_expr(expr_string(), input$xmin, input$xmax)
+    limits <- axisLimitsServer("xval")
+    eval_r_expr(expr_string(), limits()['min'], limits()['max'])
   }) 
     
   # This reactive element exist purely for the purpose of isolating the
