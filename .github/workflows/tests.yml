@@ -1,6 +1,11 @@
 name: Funcplots App Tests
 run-name: Running Tests on the App
-on: push
+on: 
+  push: 
+    branches: [master, dev]
+  pull_request:
+    branches: master
+
 jobs:
   Test-Shiny-App:
     runs-on: windows-latest
