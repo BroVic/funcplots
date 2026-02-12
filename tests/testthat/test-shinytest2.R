@@ -3,7 +3,13 @@ library(shinytest2)
 
 
 test_that("{shinytest2} recording: latex-input", {
-  app <- AppDriver$new(test_path("../.."), name = "latex-input", height = 558, width = 735)
+  app <- AppDriver$new(
+    test_path("../.."), 
+    name = "latex-input", 
+    height = 558, 
+    width = 735
+  )
+  
   app$set_inputs(expr = "x^3")
   app$expect_values()
   app$set_inputs(expr = "x^3 ")

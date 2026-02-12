@@ -1,12 +1,15 @@
 {
   "input": {
-    "color": "#000000",
+    "axes_full_screen": false,
+    "color": "#0000FF",
     "expr": "x^3",
     "go": 0,
-    "linewidth": 1,
+    "linewidth": 2,
     "theme": "light",
-    "xmax": 5,
-    "xmin": -5
+    "xval-max-value": 5,
+    "xval-min-value": -5,
+    "yval-max-value": 30,
+    "yval-min-value": 0
   },
   "output": {
     "equation": {
@@ -16,9 +19,9 @@
       ]
     },
     "plot": {
-      "src": "[image data hash: 3b00685fb344fadcaed1c94b10ce5b13]",
+      "src": "[image data hash: 4b756d0a657b72ee2d9af347e10a69a6]",
       "width": 576,
-      "height": 331.703125,
+      "height": 402,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -46,14 +49,14 @@
             "range": {
               "left": 48.88546855541721,
               "right": 569.5242839352428,
-              "bottom": 292.4582814445828,
-              "top": 6.475716064757162
+              "bottom": 363.4582814445828,
+              "top": 6.475716064757161
             }
           }
         ],
         "dims": {
           "width": 576,
-          "height": 331.703125
+          "height": 402
         }
       }
     }

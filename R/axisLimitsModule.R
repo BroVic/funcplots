@@ -27,21 +27,3 @@ axisLimitsServer <- function(id) {
     }
   )
 }
-# 
-# ui <- fluidPage(
-#   axisLimitsUI("fields", "x", 0, 10),
-#   verbatimTextOutput("out")
-# )
-# 
-# server <- function(input, output, session) {
-#   output$out <- renderPrint({
-#     result <- axisLimitsServer("fields")
-#     sprintf(
-#       "The minimum is %s and the maximum is %s", 
-#       result()['min'], 
-#       result()['max']
-#     )
-#   })
-# }
-# 
-# shinyApp(ui, server)

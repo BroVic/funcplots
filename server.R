@@ -17,17 +17,16 @@ server <- function(input, output, session) {
   
   xydata <- reactive({
     limits <- axisLimitsServer("xval")
-    eval_r_expr(expr_string(), limits()['min'], limits()['max'])
+    eval_r_expr(expr_string(), limits()[[1]], limits()[[2]])
   }) 
     
   # This reactive element exist purely for the purpose of isolating the
   # reactivity of the expression from the plotting limits, making them
   # relevant only when the `actionButton` is clicked.
-  expr_string <- eventReactive(
-    input$go,
-    generate_r_expr(latex()),
-    ignoreNULL = FALSE
-  )
+  expr_string <- reactive({
+    generate_r_expr(latex())
+  }) |>
+    bindEvent(input$go, ignoreNULL = FALSE)
 
   
   # Outputs ----

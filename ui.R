@@ -1,9 +1,6 @@
 library(shiny)
 library(bslib)
 
-szNumImput <- function() {
-  "70%"
-}
 ui <- page_sidebar(
   
   plotOutput("plot"),

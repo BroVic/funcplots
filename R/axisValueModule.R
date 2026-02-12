@@ -14,14 +14,3 @@ axisValueServer <- function(id) {
     }
   )
 }
-# 
-# ui <- fluidPage(
-#   axisValueUI("field", "Field", 10),
-#   verbatimTextOutput("out")
-# )
-# server <- function(input, output, session) {
-#   output$out <- renderPrint({
-#     axisValueServer("field")()
-#   })
-# }
-# shinyApp(ui, server)
