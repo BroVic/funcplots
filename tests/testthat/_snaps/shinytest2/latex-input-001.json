@@ -19,10 +19,10 @@
       ]
     },
     "plot": {
-      "src": "[image data hash: 4b756d0a657b72ee2d9af347e10a69a6]",
+      "src": "[image data hash: 35f82ee085d2c262d810f16081e92874]",
       "width": 576,
       "height": 402,
-      "alt": "Plot object",
+      "alt": "A plot showing function",
       "coordmap": {
         "panels": [
           {
@@ -50,7 +50,7 @@
               "left": 48.88546855541721,
               "right": 569.5242839352428,
               "bottom": 363.4582814445828,
-              "top": 6.475716064757161
+              "top": 33.56450584140805
             }
           }
         ],
