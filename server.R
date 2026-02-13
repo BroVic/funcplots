@@ -42,6 +42,7 @@ server <- function(input, output, session) {
   output$plot <- renderPlot({
     plot_function(
       xydata(),
+      equation = finalize_equation(latex(), delim = 'single'),
       col = input$color,
       linewidth = input$linewidth
     )

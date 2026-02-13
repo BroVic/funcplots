@@ -4,8 +4,14 @@ library(stringr)
 
 # Processes the supplied input in order to properly present
 # input as a typeset mathematical expression/equation
-finalize_equation <- function(str) {
-  paste0("$$f(x) = ", str, "$$")
+finalize_equation <- function(str, delim = c("double", "single")) {
+  delim <- match.arg(delim)
+  delimval <- "$$"
+  
+  if (identical(delim, "single"))
+    delimval <- "$"
+  
+  paste0(delimval, "f(x) = ", str, delimval)
 }
 
 
@@ -109,14 +115,18 @@ generate_r_expr <- function(latex_str) {
 
 
 # Plot expression ----
-plot_function <- function(data, ...) {
+plot_function <- function(data, equation = NULL, ...) {
   stopifnot(identical(names(data), c('x', 'y')))
   require(ggplot2, quietly = TRUE)
   require(scales, quietly = TRUE)
+  eq <- if (is.null(equation))
+    latex2exp::TeX(r"($ $)")
+  else
+    latex2exp::TeX(equation)
   
   ggplot(data, aes(x, y)) +
     geom_line(...) +
-    labs(y = "f(x)") +
+    labs(title = eq, y = "f(x)", alt = "A plot showing function") +
     theme_minimal(base_size = 13) +
     theme(
       axis.title = element_text(family = "serif", face = "italic", size = 16),

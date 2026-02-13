@@ -23,16 +23,20 @@ test_that("Strings are stripped of any pre-existing tags for MathJax", {
 
 
 test_that("LaTEX strings are anchored with delimiters as a full equeation", {
-  eq <- function(x) paste0("$$f(x) = ", x, "$$")
+  eq1 <- function(x) paste0("$f(x) = ", x, "$")
+  eq2 <- function(x) paste0("$$f(x) = ", x, "$$")
   
   e1 <- "x^3 + 6x^2 - 14"
-  expect_identical(finalize_equation(e1), eq(e1))
+  expect_identical(finalize_equation(e1, "single"), eq1(e1))
+  expect_identical(finalize_equation(e1), eq2(e1))
   
   e2 <- "\\left(\\frac{x - 1}{x + 2}\\right)^x"
-  expect_identical(finalize_equation(e2), eq(e2))
+  expect_identical(finalize_equation(e2, "single"), eq1(e2))
+  expect_identical(finalize_equation(e2), eq2(e2))
   
   e3 <- "9\\sqrt{3}{45}"
-  expect_identical(finalize_equation(e3), eq(e3))
+  expect_identical(finalize_equation(e3, "single"), eq1(e3))
+  expect_identical(finalize_equation(e3), eq2(e3))
 })
 
 
@@ -68,4 +72,5 @@ test_that("Plot objects are created", {
   result <- eval_r_expr("x^2", -5, 5)
   expect_s3_class(plot_function(result), "ggplot")
   expect_s3_class(plot_function(result, col = 'red', linewidth = 2), "ggplot")
+  expect_s3_class(plot_function(result, equation = "$f(x) = x^2$"), 'ggplot')
 })
