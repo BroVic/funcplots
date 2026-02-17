@@ -2,7 +2,6 @@ library(shiny)
 library(bslib)
 
 ui <- page_sidebar(
-  
   plotOutput("plot"),
   
   colourpicker::colourInput(
@@ -18,9 +17,7 @@ ui <- page_sidebar(
   
   sidebar = sidebar(
     width = 350,
-    
     withMathJax(),
-    
     input_dark_mode(id = 'theme'),
     
     textInput(
@@ -31,26 +28,19 @@ ui <- page_sidebar(
     ),
     
     uiOutput("equation"),
-
     actionButton("go", "Plot!"),
     
     card(
-      card_header("Axes"),
-      
       card_body(
-        axisLimitsUI("xval", "x", min = -5, max = 5, width = "70%"),
-        axisLimitsUI("yval", "y", min = 0, max = 30, width = "70%")
+        numericInput("min", "", value = -5, width = "70px"),
+        numericInput("max", "", value = 5, width = "70px")
       ),
-      
-      id = "axes"
+      id = "axis"
     )
   ),
   
   title = "Display Mathematical Functions",
-  
   window_title = "Function Plots",
-  
   lang = "en",
-  
   theme = bs_theme(bootswatch = 'flatly')
 )

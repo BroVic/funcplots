@@ -1,15 +1,12 @@
-library(shiny)
-library(testthat)
 source(here::here("server.R"))
-source(here::here("R/funs.R"))
 
 test_that("function is correctly evaluated", {
   testServer(server, {
     
     session$setInputs(
       expr = "x^2",
-      `xval-min-value` = -5,
-      `xval-max-value` = 5,
+      min = -5,
+      max = 5,
       color = 'red',
       linewidth = 1
     )
