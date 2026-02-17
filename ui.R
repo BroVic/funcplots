@@ -4,16 +4,24 @@ library(bslib)
 ui <- page_sidebar(
   plotOutput("plot"),
   
-  colourpicker::colourInput(
-    inputId = "color",
-    label = "Pick a color",
-    value = "blue",
-    showColour = "background",
-    palette = "limited",
-    width = "30%"
-  ), 
-  
-  sliderInput("linewidth", "Linewidth", 1, 5, 2, ticks = FALSE),
+  accordion(
+    accordion_panel(
+      title = "Plot Settings",
+      
+      colourpicker::colourInput(
+        inputId = "color",
+        label = "Pick a color",
+        value = "blue",
+        showColour = "background",
+        palette = "limited",
+        width = "30%"
+      ), 
+      
+      sliderInput("linewidth", "Linewidth", 1, 5, 2, ticks = FALSE)
+    ),
+    
+    open = FALSE
+  ),
   
   sidebar = sidebar(
     width = 350,
