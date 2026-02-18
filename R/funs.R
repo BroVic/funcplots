@@ -129,7 +129,10 @@ plot_function <- function(data, equation = NULL, ...) {
     labs(title = eq, y = "f(x)", alt = "A plot showing function") +
     theme_minimal(base_size = 13) +
     theme(
-      axis.title = element_text(family = "serif", face = "italic", size = 16),
+      plot.title = element_text(hjust = 0.5, face = "bold"),
+      axis.title = element_text(
+        family = "serif", face = "bold.italic", size = 16
+      ),
       axis.title.y = element_text(angle = 0, vjust = 0.5),
       axis.text = element_text(size = 10)
     ) +
