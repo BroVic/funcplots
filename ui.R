@@ -2,29 +2,8 @@ library(shiny)
 library(bslib)
 
 ui <- page_sidebar(
-  plotOutput("plot"),
-  
-  accordion(
-    accordion_panel(
-      title = "Plot Settings",
-      
-      colourpicker::colourInput(
-        inputId = "color",
-        label = "Pick a color",
-        value = "blue",
-        showColour = "background",
-        palette = "limited",
-        width = "30%"
-      ), 
-      
-      sliderInput("linewidth", "Linewidth", 1, 5, 2, ticks = FALSE)
-    ),
-    
-    open = FALSE
-  ),
-  
   sidebar = sidebar(
-    width = 350,
+    width = 300,
     withMathJax(),
     input_dark_mode(id = 'theme'),
     
@@ -40,15 +19,52 @@ ui <- page_sidebar(
     
     card(
       card_body(
-        numericInput("min", "", value = -5, width = "70px"),
-        numericInput("max", "", value = 5, width = "70px")
+        layout_columns(
+          h6("x:"),
+          numericInput("min", "Minimum", value = -10, width = "70px"),
+          numericInput("max", "Maximum", value = 10, width = "70px"),
+          col_widths = c(2, 5, 5)
+        )
       ),
       id = "axis"
     )
   ),
   
-  title = "Display Mathematical Functions",
-  window_title = "Function Plots",
+  div(
+    style = "display: flex; 
+             flex-direction: column;
+             height: '100%';
+             justify-content: space;",
+    
+    plotOutput("plot", height = "400px"),
+    
+    accordion(
+      id = "settings", 
+      open = FALSE,
+      multiple = FALSE,
+      
+      accordion_panel(
+        title = "Plot Settings",
+        value = "plot-settings",
+        
+        layout_columns(
+          colourpicker::colourInput(
+            inputId = "color",
+            label = "Line color",
+            value = "blue",
+            showColour = "background",
+            palette = "limited",
+            width = "30%"
+          ),
+          sliderInput("linewidth", "Line width", 1, 5, 2, ticks = TRUE)
+        )
+      )
+    )
+  ),
+  
+  title = "Mathematical Function Visualizer",
+  fillable = TRUE,
+  window_title = "Function Plotting",
   lang = "en",
   theme = bs_theme(bootswatch = 'flatly')
 )
