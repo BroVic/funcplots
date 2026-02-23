@@ -27,7 +27,11 @@ ui <- page_sidebar(
         )
       ),
       id = "axis"
-    )
+    ),
+    
+    hr(),
+    
+    downloadLink("download", "Save plot as...", "download-button")
   ),
   
   div(

@@ -28,6 +28,14 @@ server <- function(input, output, session) {
   }) |>
     bindEvent(input$go, ignoreNULL = FALSE)
 
+  gg_obj <- reactive({
+    plot_function(
+      xydata(),
+      equation = finalize_equation(isolate(latex()), delim = 'single'),
+      col = input$color,
+      linewidth = input$linewidth
+    )
+  })
   
   # Outputs ----
   output$equation <- renderUI({
@@ -37,14 +45,17 @@ server <- function(input, output, session) {
       )
     )
   })
-  
+   
   
   output$plot <- renderPlot({
-    plot_function(
-      xydata(),
-      equation = finalize_equation(latex(), delim = 'single'),
-      col = input$color,
-      linewidth = input$linewidth
-    )
+    gg_obj()
   })
+  
+  output$download <- downloadHandler(
+    filename = "Plot.png",
+    
+    content = function(file) {
+      ggsave(file, plot = isolate(gg_obj()))
+    }
+  )
 }
