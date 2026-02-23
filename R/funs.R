@@ -119,6 +119,7 @@ plot_function <- function(data, equation = NULL, ...) {
   stopifnot(identical(names(data), c('x', 'y')))
   require(ggplot2, quietly = TRUE)
   require(scales, quietly = TRUE)
+  
   eq <- if (is.null(equation))
     latex2exp::TeX(r"($ $)")
   else
@@ -126,10 +127,9 @@ plot_function <- function(data, equation = NULL, ...) {
   
   ggplot(data, aes(x, y)) +
     geom_line(...) +
-    labs(title = eq, y = "f(x)", alt = "A plot showing function") +
-    theme_minimal(base_size = 13) +
+    labs(title = eq, y = "f(x)", alt = "A plot showing math function(s)") +
     theme(
-      plot.title = element_text(hjust = 0.5, face = "bold"),
+      plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
       axis.title = element_text(
         family = "serif", face = "bold.italic", size = 16
       ),
