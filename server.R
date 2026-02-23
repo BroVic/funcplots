@@ -11,38 +11,51 @@ server <- function(input, output, session) {
   # Reactive expressions ----
   latex <- reactive({
     req(input$expr)
-    
-    input$expr |>
-      remove_mathjax_delims() |>
-      make_latex_fractions()
+    get_latex_str(input$expr)
   })
   
-  result <- reactive({
-    req(input$xmin, input$xmax)
-    evaluate_expr(expr_string(), input$xmin, input$xmax)
+  
+  xydata <- reactive({
+    req(input$min, input$max)
+    eval_r_expr(expr_string(), input$min, input$max) 
   }) 
     
   # This reactive element exist purely for the purpose of isolating the
-  # reactivity of the expression and plotting limits, making them relevant
-  # only when the actionButton is clicked
-  expr_string <- eventReactive(input$go, {
-     generate_r_expr(latex())
-  })
+  # reactivity of the expression from the plotting limits, making them
+  # relevant only when the `actionButton` is clicked.
+  expr_string <- reactive({
+    generate_r_expr(latex())
+  }) |>
+    bindEvent(input$go, ignoreNULL = FALSE)
 
-  
-  # Outputs ----
-  output$equation <- renderUI({
-    latex_str <- finalize_equation(latex())
-    withMathJax(helpText(latex_str))
-  })
-  
-  
-  output$plot <- renderPlot({
+  gg_obj <- reactive({
     plot_function(
-      result()$x,
-      result()$y, 
+      xydata(),
+      equation = finalize_equation(isolate(latex()), delim = 'single'),
       col = input$color,
       linewidth = input$linewidth
     )
   })
+  
+  # Outputs ----
+  output$equation <- renderUI({
+    withMathJax(
+      helpText(
+        finalize_equation(latex())
+      )
+    )
+  })
+   
+  
+  output$plot <- renderPlot({
+    gg_obj()
+  })
+  
+  output$download <- downloadHandler(
+    filename = "Plot.png",
+    
+    content = function(file) {
+      ggsave(file, plot = isolate(gg_obj()))
+    }
+  )
 }

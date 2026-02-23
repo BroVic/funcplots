@@ -23,16 +23,20 @@ test_that("Strings are stripped of any pre-existing tags for MathJax", {
 
 
 test_that("LaTEX strings are anchored with delimiters as a full equeation", {
-  eq <- function(x) paste0("$$f(x) = ", x, "$$")
+  eq1 <- function(x) paste0("$f(x) = ", x, "$")
+  eq2 <- function(x) paste0("$$f(x) = ", x, "$$")
   
   e1 <- "x^3 + 6x^2 - 14"
-  expect_identical(finalize_equation(e1), eq(e1))
+  expect_identical(finalize_equation(e1, "single"), eq1(e1))
+  expect_identical(finalize_equation(e1), eq2(e1))
   
   e2 <- "\\left(\\frac{x - 1}{x + 2}\\right)^x"
-  expect_identical(finalize_equation(e2), eq(e2))
+  expect_identical(finalize_equation(e2, "single"), eq1(e2))
+  expect_identical(finalize_equation(e2), eq2(e2))
   
   e3 <- "9\\sqrt{3}{45}"
-  expect_identical(finalize_equation(e3), eq(e3))
+  expect_identical(finalize_equation(e3, "single"), eq1(e3))
+  expect_identical(finalize_equation(e3), eq2(e3))
 })
 
 
@@ -50,11 +54,23 @@ test_that("Valid R expessions are parsed from LaTeX as strings", {
 })
 
 
+test_that("strings with R expressions are evaluated", {
+  expect_s3_class(eval_r_expr("x^2", -5, 5), "data.frame")
+  expect_s3_class(eval_r_expr("1/2*x", -5, 5), "data.frame")
+  expect_named(eval_r_expr("1/x^2", -5, 5), c("x", "y"))
+})
+
+
+test_that("factorials are identified and parsed", {
+  expect_equal(modify_factorials("4!"), "24")
+  expect_equal(modify_factorials("5!"), "120")
+  expect_equal(modify_factorials("1/5!"), "1/120")
+})
+
 # Plotting of functions ----
 test_that("Plot objects are created", {
-  result <- evaluate_expr("x^2", -5, 5)
-  expect_s3_class(plot_function(result$x, result$y), "ggplot")
-  
-  result2 <- evaluate_expr("1/2*x", -5, 5)
-  expect_s3_class(plot_function(result2$x, result2$y), "ggplot")
+  result <- eval_r_expr("x^2", -5, 5)
+  expect_s3_class(plot_function(result), "ggplot")
+  expect_s3_class(plot_function(result, col = 'red', linewidth = 2), "ggplot")
+  expect_s3_class(plot_function(result, equation = "$f(x) = x^2$"), 'ggplot')
 })

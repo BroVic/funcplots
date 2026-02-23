@@ -2,7 +2,7 @@
   "input": {
     "axis_full_screen": false,
     "color": "#0000FF",
-    "expr": "x^3",
+    "expr": "x^3 + 2x",
     "go": 0,
     "linewidth": 2,
     "max": 5,
@@ -11,13 +11,13 @@
   },
   "output": {
     "equation": {
-      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
+      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3 + 2x$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
       "deps": [
 
       ]
     },
     "plot": {
-      "src": "[image data hash: 377d5c6aaee1e7d74788db75a90ca312]",
+      "src": "[image data hash: 1205ec918e6162c7f1baae485a9e0479]",
       "width": 576,
       "height": 506,
       "alt": "A plot showing function",
