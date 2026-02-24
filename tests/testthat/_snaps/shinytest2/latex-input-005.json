@@ -5,8 +5,9 @@
     "expr": "x^3 + 2x^2 + 5",
     "go": 0,
     "linewidth": 2,
-    "max": 5,
-    "min": -5,
+    "max": 10,
+    "min": -10,
+    "settings": null,
     "theme": "light"
   },
   "output": {
@@ -17,10 +18,10 @@
       ]
     },
     "plot": {
-      "src": "[image data hash: c40b35b37b69be052a7a828f0d2536c5]",
+      "src": "[image data hash: ff377a9b52d9663f4082672859aa55ea]",
       "width": 576,
-      "height": 506,
-      "alt": "A plot showing function",
+      "height": 400,
+      "alt": "A plot showing math function(s)",
       "coordmap": {
         "panels": [
           {
@@ -35,26 +36,26 @@
               "y": null
             },
             "domain": {
-              "left": -5.5,
-              "right": 5.5,
-              "bottom": -1.25,
-              "top": 26.25
+              "left": -11,
+              "right": 11,
+              "bottom": -5,
+              "top": 105
             },
             "mapping": {
               "x": "x",
               "y": "y"
             },
             "range": {
-              "left": 48.88546855541721,
-              "right": 569.5242839352428,
-              "bottom": 467.4582814445828,
-              "top": 33.56450584140805
+              "left": 53.82255993150685,
+              "right": 570.5205479452054,
+              "bottom": 363.8493150684931,
+              "top": 33.51784265707506
             }
           }
         ],
         "dims": {
           "width": 576,
-          "height": 506
+          "height": 400
         }
       }
     }
