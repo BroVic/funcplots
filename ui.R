@@ -11,7 +11,7 @@ ui <- page_sidebar(
       "expr",
       "Enter an expression with variable 'x'", 
       value = "x^2",
-      placeholder = r"(e.g., x^3 - 4x^2 + 5x - 6, \sin x, e^x)"
+      placeholder = r"(e.g., x^3 - 4x^2 + 5x - 6, \sin{x}, e^x)"
     ),
     
     uiOutput("equation"),
