@@ -1,66 +1,10 @@
 {
-  "input": {
-    "axis_full_screen": false,
-    "color": "#0000FF",
-    "expr": "x^3 + 2x^2",
-    "go": 0,
-    "linewidth": 2,
-    "max": 10,
-    "min": -10,
-    "settings": null,
-    "theme": "light"
-  },
   "output": {
     "equation": {
       "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3 + 2x^2$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
       "deps": [
 
       ]
-    },
-    "plot": {
-      "src": "[image data hash: ff377a9b52d9663f4082672859aa55ea]",
-      "width": 576,
-      "height": 400,
-      "alt": "A plot showing math function(s)",
-      "coordmap": {
-        "panels": [
-          {
-            "panel": 1,
-            "row": 1,
-            "col": 1,
-            "panel_vars": {
-
-            },
-            "log": {
-              "x": null,
-              "y": null
-            },
-            "domain": {
-              "left": -11,
-              "right": 11,
-              "bottom": -5,
-              "top": 105
-            },
-            "mapping": {
-              "x": "x",
-              "y": "y"
-            },
-            "range": {
-              "left": 53.82255993150685,
-              "right": 570.5205479452054,
-              "bottom": 363.8493150684931,
-              "top": 33.51784265707506
-            }
-          }
-        ],
-        "dims": {
-          "width": 576,
-          "height": 400
-        }
-      }
     }
-  },
-  "export": {
-
   }
 }
