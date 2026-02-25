@@ -2,6 +2,12 @@ library(shiny)
 library(bslib)
 
 ui <- page_sidebar(
+  title = "Mathematical Function Visualizer",
+  fillable = TRUE,
+  window_title = "Function Plotting",
+  lang = "en",
+  theme = bs_theme(bootswatch = 'flatly'),
+  
   sidebar = sidebar(
     width = 300,
     withMathJax(),
@@ -64,11 +70,5 @@ ui <- page_sidebar(
         )
       )
     )
-  ),
-  
-  title = "Mathematical Function Visualizer",
-  fillable = TRUE,
-  window_title = "Function Plotting",
-  lang = "en",
-  theme = bs_theme(bootswatch = 'flatly')
+  )
 )
