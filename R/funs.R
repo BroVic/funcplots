@@ -120,14 +120,14 @@ plot_function <- function(data, equation = NULL, ...) {
   require(ggplot2, quietly = TRUE)
   require(scales, quietly = TRUE)
   
-  eq <- if (is.null(equation))
-    latex2exp::TeX(r"($ $)")
-  else
-    latex2exp::TeX(equation)
+  # eq <- if (is.null(equation))
+  #   latex2exp::TeX(r"($ $)")
+  # else
+  #   latex2exp::TeX(equation)
   
   ggplot(data, aes(x, y)) +
     geom_line(...) +
-    labs(title = eq, y = "f(x)", alt = "A plot showing math function(s)") +
+    labs(y = "f(x)", alt = "A plot showing math function(s)") +
     theme(
       plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
       axis.title = element_text(
