@@ -3,7 +3,6 @@ library(bslib)
 
 ui <- page_sidebar(
   title = "Mathematical Function Visualizer",
-  fillable = TRUE,
   window_title = "Function Plotting",
   lang = "en",
   theme = bs_theme(bootswatch = 'flatly'),
@@ -13,14 +12,24 @@ ui <- page_sidebar(
     withMathJax(),
     input_dark_mode(id = 'theme'),
     
-    textInput(
-      "expr",
-      "Enter an expression with variable 'x'", 
-      value = "x^2",
-      placeholder = r"(e.g., x^3 - 4x^2 + 5x - 6, \sin{x}, e^x)"
-    ),
+    card(
+      card_header(
+        tooltip(
+        span("Expression", bsicons::bs_icon("question-circle")),
+        "Enter an expression based on a variable 'x' (LaTeX supported)",
+        placement = "right"
+        )
+      ),
+      textInput(
+        "expr",
+        NULL,
+        value = "x^2",
+        placeholder = r"(e.g., x^3 - 4x^2 + 5x - 6, \sin{x}, e^x)"
+      ),
+      
+      uiOutput("equation")
+    ), 
     
-    uiOutput("equation"),
     actionButton("go", "Plot!"),
     
     card(
@@ -35,21 +44,19 @@ ui <- page_sidebar(
       id = "axis"
     ),
     
-    hr(),
-    
-    downloadLink("download", "Save plot as...", "download-button")
+    card(downloadLink("download", "Save plot as...", "download-button"))
   ),
   
-  div(
-    style = "display: flex; 
-             flex-direction: column;
-             height: '100%';
-             justify-content: space;",
-    
-    plotOutput("plot", height = "400px"),
+  card(
+    fill = FALSE,
+    plotOutput("plot", height = "400px")
+  ),
+  
+  card(
+    fill = FALSE,
     
     accordion(
-      id = "settings", 
+      id = "settings",
       open = FALSE,
       multiple = FALSE,
       
@@ -63,9 +70,10 @@ ui <- page_sidebar(
             label = "Line color",
             value = "blue",
             showColour = "background",
-            palette = "limited",
-            width = "30%"
+            palette = "square",
+            width = "20%"
           ),
+          
           sliderInput("linewidth", "Line width", 1, 5, 2, ticks = TRUE)
         )
       )
