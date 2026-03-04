@@ -123,7 +123,7 @@ plot_function <- function(data, equation = NULL, ...) {
   eq <- if (is.null(equation))
     latex2exp::TeX(r"($ $)")
   else
-    latex2exp::TeX(equation)
+    latex2exp::TeX(equation, bold = TRUE, italic = TRUE)
   
   ggplot(data, aes(x, y)) +
     geom_line(...) +
