@@ -48,6 +48,8 @@ make_latex_fractions <- function(expr) {
 
 
 
+# Entry point for the display pipeline. Strips any existing MathJax
+# delimiters and converts plain fractions to LaTeX notation.
 get_latex_str <- function(str) {
   str |>
     remove_mathjax_delims() |>
@@ -56,6 +58,8 @@ get_latex_str <- function(str) {
 
 # Evaluate expression ----
 
+# Evaluate an R expression string over a sequence of x values and
+# return a data frame with columns x and y.
 eval_r_expr <- function(expr_str, xmin, xmax) {
   x <- seq(xmin, xmax, by = .001)
   y <- eval(parse(text = expr_str))
@@ -106,6 +110,8 @@ modify_factorials <- function(str) {
 
 
 
+# Entry point for the evaluation pipeline. Pre-processes LaTeX for
+# unsupported constructs (roots) then converts to an R expression string.
 generate_r_expr <- function(latex_str) {
   latex_str |>
     modify_roots() |>
