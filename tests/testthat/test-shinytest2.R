@@ -57,3 +57,14 @@ test_that("{shinytest2} recording: invalid_expr", {
   app$click("go")
   app$expect_values()
 })
+
+
+test_that("{shinytest2} recording: reverse_x_order", {
+  app <- AppDriver$new(test_path("../.."), name = "reverse_x_order", height = 558, 
+      width = 735)
+  app$set_inputs(min = character(0))
+  app$set_inputs(min = 5)
+  app$set_inputs(max = character(0))
+  app$set_inputs(max = -5)
+  app$expect_values()
+})

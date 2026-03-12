@@ -28,13 +28,16 @@ test_that("function is correctly evaluated", {
 
 test_that("Bad expressions are handled", {
   testServer(server, {
-    session$setInputs(
-      expr = "x +* 2",
-      min = -5,
-      max = 5
-    )
-    
+    session$setInputs(expr = "x +* 2", min = -5, max = 5)
     session$setInputs(go = 1)
     expect_error(expr_string(), "Invalid expression")
+  })
+})
+
+test_that("min < max", {
+  testServer(server, {
+    session$setInputs(expr = "x^2", min = 5, max = -5)
+    session$setInputs(go = 1)
+    expect_error(xydata(), "'Minimum' should be less than 'Maximum'")
   })
 })
