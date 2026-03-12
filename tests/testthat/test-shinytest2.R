@@ -46,3 +46,14 @@ test_that("{shinytest2} recording: plot-settings", {
   app$set_inputs(linewidth = 5)
   app$expect_values(output = c("download", "equation"))
 })
+
+
+test_that("{shinytest2} recording: invalid_expr", {
+  app <- AppDriver$new(test_path("../.."), name = "invalid_expr", height = 558, width = 735)
+  app$set_inputs(expr = "x2")
+  app$set_window_size(width = 735, height = 558)
+  app$set_inputs(expr = "x+*2")
+  app$set_window_size(width = 735, height = 558)
+  app$click("go")
+  app$expect_values()
+})
