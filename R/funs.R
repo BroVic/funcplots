@@ -113,9 +113,15 @@ modify_factorials <- function(str) {
 # Entry point for the evaluation pipeline. Pre-processes LaTeX for
 # unsupported constructs (roots) then converts to an R expression string.
 generate_r_expr <- function(latex_str) {
-  latex_str |>
-    modify_roots() |>
-    latex2r::latex2r()
+  tryCatch({
+    latex_str |>
+      modify_roots() |>
+      latex2r::latex2r()
+  },
+  latex2r.error = function(e) {
+    message("Invalid expression: ", conditionMessage(e))
+    NULL
+  })
 }
 
 

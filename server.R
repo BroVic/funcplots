@@ -24,7 +24,9 @@ server <- function(input, output, session) {
   # reactivity of the expression from the plotting limits, making them
   # relevant only when the `actionButton` is clicked.
   expr_string <- reactive({
-    generate_r_expr(latex())
+    e <- generate_r_expr(latex())
+    validate(need(e, "Invalid expression. Check your input."))
+    e
   }) |>
     bindEvent(input$go, ignoreNULL = FALSE)
 

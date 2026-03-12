@@ -25,3 +25,16 @@ test_that("function is correctly evaluated", {
     expect_type(output$plot, 'list')
   })
 })
+
+test_that("Bad expressions are handled", {
+  testServer(server, {
+    session$setInputs(
+      expr = "x +* 2",
+      min = -5,
+      max = 5
+    )
+    
+    session$setInputs(go = 1)
+    expect_error(expr_string(), "Invalid expression")
+  })
+})
