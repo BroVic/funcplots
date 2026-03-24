@@ -3,7 +3,7 @@ library(stringr)
 # Display equation ----
 
 # Processes the supplied input in order to properly present
-# input as a typeset mathematical expression/equation
+# it as a typeset mathematical expression/equation
 finalize_equation <- function(str, delim = c("double", "single")) {
   delim <- match.arg(delim)
   delimval <- "$$"
