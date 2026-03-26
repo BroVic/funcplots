@@ -17,6 +17,9 @@ server <- function(input, output, session) {
   
   xydata <- reactive({
     req(input$min, input$max)
+    validate(
+      need(input$min < input$max, "'Minimum' should be less than 'Maximum'")
+    )
     eval_r_expr(expr_string(), input$min, input$max) 
   }) 
     
@@ -24,7 +27,9 @@ server <- function(input, output, session) {
   # reactivity of the expression from the plotting limits, making them
   # relevant only when the `actionButton` is clicked.
   expr_string <- reactive({
-    generate_r_expr(latex())
+    e <- generate_r_expr(latex())
+    validate(need(e, "Invalid expression. Check your input."))
+    e
   }) |>
     bindEvent(input$go, ignoreNULL = FALSE)
 

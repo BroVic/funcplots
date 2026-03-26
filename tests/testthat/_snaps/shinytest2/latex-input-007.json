@@ -1,65 +1,10 @@
 {
-  "input": {
-    "axis_full_screen": false,
-    "color": "#0000FF",
-    "expr": "x^3 + 2x^2 + 5x - 21",
-    "go": 0,
-    "linewidth": 2,
-    "max": 5,
-    "min": -5,
-    "theme": "light"
-  },
   "output": {
     "equation": {
       "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^3 + 2x^2 + 5x - 21$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
       "deps": [
 
       ]
-    },
-    "plot": {
-      "src": "[image data hash: afdf717f01af57d6f3ee92a9a5335e25]",
-      "width": 576,
-      "height": 506,
-      "alt": "A plot showing function",
-      "coordmap": {
-        "panels": [
-          {
-            "panel": 1,
-            "row": 1,
-            "col": 1,
-            "panel_vars": {
-
-            },
-            "log": {
-              "x": null,
-              "y": null
-            },
-            "domain": {
-              "left": -5.5,
-              "right": 5.5,
-              "bottom": -1.25,
-              "top": 26.25
-            },
-            "mapping": {
-              "x": "x",
-              "y": "y"
-            },
-            "range": {
-              "left": 48.88546855541721,
-              "right": 569.5242839352428,
-              "bottom": 467.4582814445828,
-              "top": 33.56450584140805
-            }
-          }
-        ],
-        "dims": {
-          "width": 576,
-          "height": 506
-        }
-      }
     }
-  },
-  "export": {
-
   }
 }

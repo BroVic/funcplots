@@ -1,5 +1,4 @@
 library(testthat)
-here::i_am("tests/testthat/test-funs.R")
 source(here::here("R/funs.R"))
 
 # Display of equations ----
@@ -51,6 +50,8 @@ test_that("higher-order root functions are translated to inverted powers", {
 test_that("Valid R expessions are parsed from LaTeX as strings", {
   expect_type(generate_r_expr("\\sqrt[3]x"), "character")
   expect_identical(generate_r_expr("9\\sqrt[4]{y}"), "9 * y^(1 / 4)")
+  expect_null(generate_r_expr("x +* 2"))
+  expect_message(generate_r_expr("x +* 2"), "Invalid expression")
 })
 
 

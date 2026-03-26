@@ -1,0 +1,32 @@
+{
+  "input": {
+    "axis_full_screen": false,
+    "color": "#0000FF",
+    "expr": "x^2",
+    "go": 0,
+    "linewidth": 2,
+    "max": -5,
+    "min": 5,
+    "settings": null,
+    "theme": "light"
+  },
+  "output": {
+    "equation": {
+      "html": "<head><\/head>\n<span class=\"help-block\">$$f(x) = x^2$$<\/span>\n<script>if (window.MathJax) MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);<\/script>",
+      "deps": [
+
+      ]
+    },
+    "plot": {
+      "message": "'Minimum' should be less than 'Maximum'",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    }
+  },
+  "export": {
+
+  }
+}

@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 sandbox
-claude.txt
+claude-ideas.txt
+tests/testthat/_snaps/shinytest2/*_.new.png
