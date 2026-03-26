@@ -68,3 +68,15 @@ test_that("{shinytest2} recording: reverse_x_order", {
   app$set_inputs(max = -5)
   app$expect_values()
 })
+
+
+test_that("{shinytest2} recording: run_on_enter", {
+  app <- AppDriver$new(test_path("../.."), name = "run_on_enter", height = 888, width = 1607)
+  app$set_inputs(axis_full_screen = FALSE, allow_no_input_binding_ = TRUE)
+  app$set_inputs(expr = "x^")
+  app$set_window_size(width = 1607, height = 888)
+  app$set_inputs(expr = "x^3")
+  app$set_window_size(width = 1607, height = 888)
+  app$click("go")
+  app$expect_values()
+})

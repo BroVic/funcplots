@@ -6,12 +6,10 @@ ui <- page_sidebar(
   window_title = "Function Plotting",
   lang = "en",
   theme = bs_theme(bootswatch = 'flatly'),
-  
   sidebar = sidebar(
     width = 300,
     withMathJax(),
     input_dark_mode(id = 'theme'),
-    
     card(
       card_header(
         tooltip(
@@ -26,12 +24,9 @@ ui <- page_sidebar(
         value = "x^2",
         placeholder = r"(e.g., x^3 - 4x^2 + 5x - 6, \sin{x}, e^x)"
       ),
-      
       uiOutput("equation")
     ), 
-    
     actionButton("go", "Plot!"),
-    
     card(
       card_body(
         layout_columns(
@@ -43,27 +38,21 @@ ui <- page_sidebar(
       ),
       id = "axis"
     ),
-    
     card(downloadLink("download", "Save plot as...", "download-button"))
   ),
-  
   card(
     fill = FALSE,
     plotOutput("plot", height = "400px")
   ),
-  
   card(
     fill = FALSE,
-    
     accordion(
       id = "settings",
       open = FALSE,
       multiple = FALSE,
-      
       accordion_panel(
         title = "Plot Settings",
         value = "plot-settings",
-        
         layout_columns(
           colourpicker::colourInput(
             inputId = "color",
@@ -73,10 +62,18 @@ ui <- page_sidebar(
             palette = "square",
             width = "20%"
           ),
-          
           sliderInput("linewidth", "Line width", 1, 5, 2, ticks = TRUE)
         )
       )
     )
-  )
+  ),
+
+  # Custom JavaScript for triggering the plotting event when user hits 'Enter'
+  tags$script(HTML("
+    $(document).on('keydown', '#expr', function(e) {
+      if (e.key == 'Enter') {
+	      $('#go').click();
+      }
+    });
+  "))
 )
