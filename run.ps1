@@ -1,10 +1,11 @@
 param([switch]$Test)
 
 if ($Test) {
-    $cmd = "library(shiny); runApp(launch.browser = TRUE)"
+    $cmd = "Sys.setenv(NOT_CRAN = 'true'); shinytest2::test_app('.')"
 } else {
-    $cmd = "shinytest2::test_app()
+    $cmd = "library(shiny); runApp(launch.browser = TRUE)"
 }
 
+$env:RENV_CONFIG_SYNCHRONIZED_CHECK = 'FALSE'
 Rscript -e $cmd
 
