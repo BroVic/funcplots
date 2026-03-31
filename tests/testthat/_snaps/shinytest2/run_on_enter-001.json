@@ -18,7 +18,7 @@
       ]
     },
     "plot": {
-      "src": "[image data hash: ab0905097654045b8bfc19e485ed3e70]",
+      "src": "[image data hash: 6a032ea99d7590faf495443587462192]",
       "width": 1241,
       "height": 400,
       "alt": "A plot showing math function(s)",
@@ -46,10 +46,10 @@
               "y": "y"
             },
             "range": {
-              "left": 62.71318493150684,
+              "left": 63.15068493150687,
               "right": 1235.520547945206,
-              "bottom": 363.8493150684931,
-              "top": 33.51784265707506
+              "bottom": 361.8493150684932,
+              "top": 35.95890410958904
             }
           }
         ],
