@@ -150,3 +150,11 @@ plot_function <- function(data, equation = NULL, ...) {
     ) +
     scale_x_continuous(n.breaks = 10)
 }
+
+
+# Display the app version
+# Note that it returns a <small> element
+app_version <- function() {
+  desc <- here::here("DESCRIPTION")
+  tags$small(paste0("v. ", desc::desc_get_version(file = desc)))
+}

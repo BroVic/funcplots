@@ -1,5 +1,5 @@
 Title: Mathematical Function Visualizer
-Version: 0.1.0
+Version: 0.2.0
 Description: An R Shiny application that visualizes mathematical functions.
     Users enter expressions (plain math or LaTeX), and the app parses, renders
     them as typeset equations (via MathJax), and plots them with ggplot2.
@@ -10,12 +10,13 @@ Imports:
     bslib,
     bsicons,
     colourpicker,
+    desc,
     ggplot2,
+    here,
     scales,
     latex2exp,
     latex2r,
     stringr
 Suggests:
     shinytest2,
-    testthat (>= 3.0.0),
-    here
+    testthat (>= 3.0.0)
