@@ -6,10 +6,15 @@ ui <- page_sidebar(
   window_title = "Function Plotting",
   lang = "en",
   theme = bs_theme(bootswatch = 'flatly'),
+  
   sidebar = sidebar(
     width = 300,
+    
     withMathJax(),
+    
+    # Sidebar ----
     input_dark_mode(id = 'theme'),
+    
     card(
       card_header(
         tooltip(
@@ -38,12 +43,17 @@ ui <- page_sidebar(
       ),
       id = "axis"
     ),
-    card(downloadLink("download", "Save plot as...", "download-button"))
+    card(downloadLink("download", "Save plot as...", "download-button")),
+    tags$i(app_version())
   ),
+
+  # Main plotting area ----
   card(
     fill = FALSE,
     plotOutput("plot", height = "400px")
   ),
+  
+  # Plot settings ----
   card(
     fill = FALSE,
     accordion(
@@ -68,7 +78,8 @@ ui <- page_sidebar(
     )
   ),
 
-  # Custom JavaScript for triggering the plotting event when user hits 'Enter'
+  # Custom JavaScript ----
+  # Triggering the plotting event when user hits 'Enter'
   tags$script(HTML("
     $(document).on('keydown', '#expr', function(e) {
       if (e.key == 'Enter') {
